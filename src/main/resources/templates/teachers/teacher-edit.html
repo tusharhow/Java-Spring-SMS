@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Teacher</title>
+    <style>
+        .container { width: 80%; margin: 0 auto; padding: 20px; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; }
+        .form-group input { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
+        .btn { padding: 8px 16px; text-decoration: none; color: white; border-radius: 4px; border: none; cursor: pointer; }
+        .btn-primary { background-color: #007bff; }
+        .btn-back { background-color: #6c757d; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Edit Teacher</h2>
+    <form th:action="@{/teachers/edit/{id}(id=${teacher.id})}" method="post">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" th:value="${teacher.name}" required>
+        </div>
+        <div class="form-group">
+            <label for="subject">Subject:</label>
+            <input type="text" id="subject" name="subject" th:value="${teacher.subject}" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" th:value="${teacher.email}" required>
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" name="phone" th:value="${teacher.phone}" required>
+        </div>
+        <div class="form-group">
+            <label for="qualification">Qualification:</label>
+            <input type="text" id="qualification" name="qualification" th:value="${teacher.qualification}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a href="/teachers" class="btn btn-back">Cancel</a>
+    </form>
+</div>
+</body>
+</html>

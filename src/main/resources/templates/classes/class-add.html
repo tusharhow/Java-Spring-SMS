@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Class</title>
+    <style>
+        .container { width: 80%; margin: 0 auto; padding: 20px; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; }
+        .form-group input { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
+        .btn { padding: 8px 16px; text-decoration: none; color: white; border-radius: 4px; border: none; cursor: pointer; }
+        .btn-primary { background-color: #007bff; }
+        .btn-back { background-color: #6c757d; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Add New Class</h2>
+    <form action="/classes/add" method="post">
+        <div class="form-group">
+            <label for="name">Class Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="section">Section:</label>
+            <input type="text" id="section" name="section" required>
+        </div>
+        <div class="form-group">
+            <label for="teacherName">Teacher Name:</label>
+            <input type="text" id="teacherName" name="teacherName" required>
+        </div>
+        <div class="form-group">
+            <label for="capacity">Capacity:</label>
+            <input type="number" id="capacity" name="capacity" required>
+        </div>
+        <div class="form-group">
+            <label for="schedule">Schedule:</label>
+            <input type="text" id="schedule" name="schedule" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="/classes" class="btn btn-back">Cancel</a>
+    </form>
+</div>
+</body>
+</html>

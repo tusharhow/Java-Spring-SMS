@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Exam Management</title>
+    <style>
+        .container { width: 80%; margin: 0 auto; padding: 20px; }
+        .header { display: flex; justify-content: space-between; margin-bottom: 20px; }
+        .btn { padding: 8px 16px; text-decoration: none; color: white; border-radius: 4px; }
+        .btn-primary { background-color: #007bff; }
+        .btn-back { background-color: #6c757d; }
+        .btn-danger { background-color: #dc3545; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 12px; border: 1px solid #ddd; text-align: left; }
+        th { background-color: #f8f9fa; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h2>Exam Management</h2>
+        <div>
+            <a href="/dashboard" class="btn btn-back">Back</a>
+            <a href="/exams/add" class="btn btn-primary">Add New Exam</a>
+        </div>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Subject</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Duration</th>
+            <th>Class</th>
+            <th>Total Marks</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${exams.empty}">
+            <td colspan="9" style="text-align: center;">No Exams Available</td>
+        </tr>
+        <tr th:each="exam : ${exams}">
+            <td th:text="${exam.id}"></td>
+            <td th:text="${exam.name}"></td>
+            <td th:text="${exam.subject}"></td>
+            <td th:text="${exam.date}"></td>
+            <td th:text="${exam.startTime}"></td>
+            <td th:text="${exam.duration}"></td>
+            <td th:text="${exam.className}"></td>
+            <td th:text="${exam.totalMarks}"></td>
+            <td>
+                <a th:href="@{/exams/edit/{id}(id=${exam.id})}" class="btn btn-primary">Edit</a>
+                <a th:href="@{/exams/delete/{id}(id=${exam.id})}"
+                   class="btn btn-danger"
+                   onclick="return confirm('Are you sure?')">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

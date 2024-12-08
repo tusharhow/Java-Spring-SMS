@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Class Management</title>
+    <style>
+        .container { width: 80%; margin: 0 auto; padding: 20px; }
+        .header { display: flex; justify-content: space-between; margin-bottom: 20px; }
+        .btn { padding: 8px 16px; text-decoration: none; color: white; border-radius: 4px; }
+        .btn-primary { background-color: #007bff; }
+        .btn-back { background-color: #6c757d; }
+        .btn-danger { background-color: #dc3545; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 12px; border: 1px solid #ddd; text-align: left; }
+        th { background-color: #f8f9fa; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h2>Class Management</h2>
+        <div>
+            <a href="/dashboard" class="btn btn-back">Back</a>
+            <a href="/classes/add" class="btn btn-primary">Add New Class</a>
+        </div>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Section</th>
+            <th>Teacher</th>
+            <th>Capacity</th>
+            <th>Schedule</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${classes.empty}">
+            <td colspan="7" style="text-align: center;">No Classes Available</td>
+        </tr>
+        <tr th:each="class : ${classes}">
+            <td th:text="${class.id}"></td>
+            <td th:text="${class.name}"></td>
+            <td th:text="${class.section}"></td>
+            <td th:text="${class.teacherName}"></td>
+            <td th:text="${class.capacity}"></td>
+            <td th:text="${class.schedule}"></td>
+            <td>
+                <a th:href="@{/classes/edit/{id}(id=${class.id})}" class="btn btn-primary">Edit</a>
+                <a th:href="@{/classes/delete/{id}(id=${class.id})}"
+                   class="btn btn-danger"
+                   onclick="return confirm('Are you sure?')">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

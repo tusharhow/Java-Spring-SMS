@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Mark Management</title>
+    <style>
+        .container { width: 80%; margin: 0 auto; padding: 20px; }
+        .header { display: flex; justify-content: space-between; margin-bottom: 20px; }
+        .btn { padding: 8px 16px; text-decoration: none; color: white; border-radius: 4px; }
+        .btn-primary { background-color: #007bff; }
+        .btn-back { background-color: #6c757d; }
+        .btn-danger { background-color: #dc3545; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 12px; border: 1px solid #ddd; text-align: left; }
+        th { background-color: #f8f9fa; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h2>Mark Management</h2>
+        <div>
+            <a href="/dashboard" class="btn btn-back">Back</a>
+            <a href="/marks/add" class="btn btn-primary">Add New Mark</a>
+        </div>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Student Name</th>
+            <th>Exam</th>
+            <th>Subject</th>
+            <th>Class</th>
+            <th>Marks Obtained</th>
+            <th>Total Marks</th>
+            <th>Grade</th>
+            <th>Remarks</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${marks.empty}">
+            <td colspan="10" style="text-align: center;">No Marks Available</td>
+        </tr>
+        <tr th:each="mark : ${marks}">
+            <td th:text="${mark.id}"></td>
+            <td th:text="${mark.studentName}"></td>
+            <td th:text="${mark.examName}"></td>
+            <td th:text="${mark.subject}"></td>
+            <td th:text="${mark.className}"></td>
+            <td th:text="${mark.marksObtained}"></td>
+            <td th:text="${mark.totalMarks}"></td>
+            <td th:text="${mark.grade}"></td>
+            <td th:text="${mark.remarks}"></td>
+            <td>
+                <a th:href="@{/marks/edit/{id}(id=${mark.id})}" class="btn btn-primary">Edit</a>
+                <a th:href="@{/marks/delete/{id}(id=${mark.id})}"
+                   class="btn btn-danger"
+                   onclick="return confirm('Are you sure?')">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
