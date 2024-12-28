@@ -25,7 +25,7 @@ public class LoginController {
     }
 
     @GetMapping("/login")
-    public String loginPage(Model model) {  // Add Model parameter
+    public String loginPage(Model model) { 
         return "login";
     }
 
@@ -33,15 +33,15 @@ public class LoginController {
     public String login(@RequestParam String username,
                         @RequestParam String password,
                         HttpSession session,
-                        Model model) {  // Use org.springframework.ui.Model
-        // Hardcoded credentials for testing
+                        Model model) { 
+      
         if (username.equals("admin") && password.equals("admin123")) {
             User user = new User(username, password, "ADMIN");
             session.setAttribute("user", user);
             return "redirect:/dashboard";
         }
 
-        model.addText( "Invalid credentials");  // Use addAttribute instead of addText
+        model.addText( "Invalid credentials");
         return "login";
     }
 

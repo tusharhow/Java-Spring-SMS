@@ -1,17 +1,15 @@
 package com.varsity.demo.demo.models;
 
 
-
 public class Student {
     private Long id;
     private String name;
     private String rollNumber;
     private String className;
 
-    // Default constructor
+
     public Student() {}
 
-    // Constructor with parameters
     public Student(Long id, String name, String rollNumber, String className) {
         this.id = id;
         this.name = name;

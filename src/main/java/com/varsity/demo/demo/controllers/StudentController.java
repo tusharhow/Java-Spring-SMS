@@ -1,18 +1,14 @@
 package com.varsity.demo.demo.controllers;
 
 import com.varsity.demo.demo.models.Student;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import java.util.ArrayList;
 import java.util.List;
-
-
 import org.springframework.web.servlet.ModelAndView;
 
 

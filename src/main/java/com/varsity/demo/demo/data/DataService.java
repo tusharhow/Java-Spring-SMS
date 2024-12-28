@@ -2,9 +2,7 @@ package com.varsity.demo.demo.data;
 
 
 import com.varsity.demo.demo.models.User;
-
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +13,7 @@ public class DataService {
 
     public DataService() {
         users = new ArrayList<>();
-        // Add default admin user
+       
         users.add(new User("admin", "admin123", "ADMIN"));
     }
 
