@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpSession;
 public class LoginController {
 
     @Autowired
-    public DataService dataService;
+    private DataService dataService;
 
     @GetMapping("/")
     public String home() {
@@ -35,13 +35,19 @@ public class LoginController {
                         HttpSession session,
                         Model model) { 
       
-        if (username.equals("admin") && password.equals("admin123")) {
-            User user = new User(username, password, "ADMIN");
+        User user = dataService.authenticateUser(username, password);
+        
+        if (user != null) {
             session.setAttribute("user", user);
-            return "redirect:/dashboard";
+            
+            if ("ADMIN".equals(user.getRole())) {
+                return "redirect:/dashboard";
+            } else if ("STUDENT".equals(user.getRole())) {
+                return "redirect:/student-dashboard";
+            }
         }
 
-        model.addText( "Invalid credentials");
+        model.addText("Invalid credentials");
         return "login";
     }
 

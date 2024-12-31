@@ -1,26 +1,40 @@
 package com.varsity.demo.demo.controllers;
 
-
 import com.varsity.demo.demo.models.Mark;
 import org.springframework.stereotype.Controller;
 import java.util.ArrayList;
 import java.util.List;
-
-
+import java.util.Map;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-
 import org.springframework.ui.Model;
-
 import org.springframework.web.bind.annotation.ModelAttribute;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import com.varsity.demo.demo.services.LocalStorageService;
+import com.varsity.demo.demo.models.Student;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class MarkController {
 
-    private List<Mark> marks = new ArrayList<>();
+    private final LocalStorageService storageService;
+    private List<Mark> marks;
     private Long idCounter = 1L;
+
+    @Autowired
+    public MarkController(LocalStorageService storageService) {
+        this.storageService = storageService;
+        Map<String, List<Mark>> allMarks = storageService.loadMarks();
+        this.marks = new ArrayList<>();
+        allMarks.values().forEach(this.marks::addAll);
+        if (!marks.isEmpty()) {
+            idCounter = marks.stream()
+                    .mapToLong(Mark::getId)
+                    .max()
+                    .getAsLong() + 1;
+        }
+    }
 
     @GetMapping("/marks")
     public String listMarks(Model model) {
@@ -30,14 +44,24 @@ public class MarkController {
 
     @GetMapping("/marks/add")
     public String showAddForm(Model model) {
+        List<Student> students = storageService.loadStudents();
         model.addAttribute("mark", new Mark());
+        model.addAttribute("students", students);
         return "marks/mark-add";
     }
 
     @PostMapping("/marks/add")
-    public String addMark(@ModelAttribute Mark mark) {
+    public String addMark(@ModelAttribute Mark mark, @RequestParam String rollNumber) {
         mark.setId(idCounter++);
         marks.add(mark);
+        
+        // Update storage with new mark using roll number as key
+        Map<String, List<Mark>> allMarks = storageService.loadMarks();
+        List<Mark> studentMarks = allMarks.getOrDefault(rollNumber, new ArrayList<>());
+        studentMarks.add(mark);
+        allMarks.put(rollNumber, studentMarks);
+        storageService.saveMarks(allMarks);
+        
         return "redirect:/marks";
     }
 

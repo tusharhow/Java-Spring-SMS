@@ -1,5 +1,6 @@
 package com.varsity.demo.demo.models;
 
+
 public class Class {
     private Long id;
     private String name;

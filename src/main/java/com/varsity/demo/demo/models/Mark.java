@@ -6,13 +6,28 @@ public class Mark {
     private String examName;
     private String subject;
     private String className;
-    private Integer marksObtained;
-    private Integer totalMarks;
+    private Double marksObtained;
+    private Double totalMarks;
     private String grade;
     private String remarks;
 
     public Mark() {}
 
+    public Mark(Long id, String studentName, String examName, String subject, 
+                String className, Double marksObtained, Double totalMarks, 
+                String grade, String remarks) {
+        this.id = id;
+        this.studentName = studentName;
+        this.examName = examName;
+        this.subject = subject;
+        this.className = className;
+        this.marksObtained = marksObtained;
+        this.totalMarks = totalMarks;
+        this.grade = grade;
+        this.remarks = remarks;
+    }
+
+    // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -28,11 +43,11 @@ public class Mark {
     public String getClassName() { return className; }
     public void setClassName(String className) { this.className = className; }
 
-    public Integer getMarksObtained() { return marksObtained; }
-    public void setMarksObtained(Integer marksObtained) { this.marksObtained = marksObtained; }
+    public Double getMarksObtained() { return marksObtained; }
+    public void setMarksObtained(Double marksObtained) { this.marksObtained = marksObtained; }
 
-    public Integer getTotalMarks() { return totalMarks; }
-    public void setTotalMarks(Integer totalMarks) { this.totalMarks = totalMarks; }
+    public Double getTotalMarks() { return totalMarks; }
+    public void setTotalMarks(Double totalMarks) { this.totalMarks = totalMarks; }
 
     public String getGrade() { return grade; }
     public void setGrade(String grade) { this.grade = grade; }

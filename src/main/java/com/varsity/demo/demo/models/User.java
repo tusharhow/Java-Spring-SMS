@@ -4,6 +4,9 @@ public class User {
     private static int counter = 1;
     private int id;
     private String username;
+    private String password;
+    private String role;
+    private String studentId;
 
     public static int getCounter() {
         return counter;
@@ -45,14 +48,24 @@ public class User {
         return role;
     }
 
-    private String password;
-    private String role;
-
     public User(String username, String password, String role) {
         this.id = counter++;
         this.username = username;
         this.password = password;
         this.role = role;
+    }
+
+    public User(String username, String password, String role, String studentId) {
+        this(username, password, role);
+        this.studentId = studentId;
+    }
+
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
     }
 
 }
