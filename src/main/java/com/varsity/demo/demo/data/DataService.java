@@ -27,8 +27,8 @@ public class DataService {
         
         // Static student credentials
         users.add(new User("student1", "student123", "STUDENT", "STU001"));
-        users.add(new User("student2", "student123", "STUDENT", "STU002"));
-        users.add(new User("student3", "student123", "STUDENT", "STU003"));
+//        users.add(new User("student2", "student123", "STUDENT", "STU002"));
+//        users.add(new User("student3", "student123", "STUDENT", "STU003"));
     }
 
     private void initializeStudents() {
